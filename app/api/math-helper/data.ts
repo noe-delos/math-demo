@@ -293,3 +293,253 @@ d) f est solution de l'équation différentielle, donc de la forme: f(x) = Ce^((
          C = 2
    Et donc: f(x) = 2e^((1/2)x) - 3
 `;
+
+export const courseSecondCourse = `
+Chapitre 4
+Matrices
+
+I - Notion de matrice et vocabulaire
+Dans tout le chapitre n, p, q sont des entiers naturels non nuls.
+
+Définition 1
+Une matrice A à n lignes et p colonnes est un tableau défini par n × p éléments de ℝ notés a_{i,j} pour 1 ≤ i ≤ n et 1 ≤ j ≤ p avec ∀(i, j) ∈ [[1; n]] × [[1; p]], a_{i,j} ∈ ℝ.
+Le nombre a_{i,j} est le coefficient d'indice (i, j) de la matrice A.
+La matrice A est parfois dite de taille ou de format (n, p) ou tout simplement matrice n × p.
+L'ensemble des matrices de taille (n, p) à coefficients dans ℝ est noté M_{n,p}(ℝ).
+
+On présente généralement les matrices de cette manière :
+j-ème colonne
+↓
+(a_{11} a_{12} ... a_{1j} ... a_{1p})
+(a_{21} a_{22} ... a_{2j} ... a_{2p})
+(  ⋮     ⋮           ⋮           ⋮  )
+i-ème ligne → (a_{i1} a_{i2} ... a_{ij} ... a_{ip}) ∈ M_{n,p}(ℝ)
+(  ⋮     ⋮           ⋮           ⋮  )
+(a_{n1} a_{n2} ... a_{nj} ... a_{np})
+
+Exercice 1
+1. À quels ensembles appartiennent les matrices suivantes ?
+   1) A = (1 2 3)
+          (4 5 6)
+          (7 8 9)
+   
+   2) B = (1  -1   e )
+          (π  √2  0,2)
+   
+   3) Id₃ = (1 0 0)
+             (0 1 0)
+             (0 0 1)
+   
+   4) C = (1)
+          (2)
+          (3)
+   
+   5) D = (1  -2)
+          (-2  4)
+   
+   6) E = (2 1)
+          (0 0)
+   
+   7) 0₂,₃ = (0 0 0)
+              (0 0 0)
+   
+   8) F = (3)
+
+2. Écrire sous forme de tableau la matrice M = (i−j)_{1≤i≤3, 1≤j≤4}.
+
+Définition 2
+On adopte le vocabulaire suivant :
+- M_n(ℝ) = M_{n,n}(ℝ) est l'ensemble des matrices carrées de taille n à coefficients dans ℝ.
+- M_{1,p}(ℝ) est l'ensemble des matrices lignes de taille p à coefficients dans ℝ.
+- M_{n,1}(ℝ) est l'ensemble des matrices colonnes de taille n à coefficients dans ℝ.
+- A = (a_{i,j}) ∈ M_n(ℝ) est une matrice triangulaire supérieure si ∀(i, j) ∈ [[1; n]]², i > j ⟹ a_{i,j} = 0.
+- A = (a_{i,j}) ∈ M_n(ℝ) est une matrice triangulaire inférieure si ∀(i, j) ∈ [[1; n]]², i < j ⟹ a_{i,j} = 0.
+- A = (a_{i,j}) ∈ M_n(ℝ) est une matrice diagonale si ∀(i, j) ∈ [[1; n]]², i ≠ j ⟹ a_{i,j} = 0.
+  On note parfois (a_{i,j}) = diag(a_{11}, ..., a_{nn}).
+- A = (a_{i,j}) ∈ M_n(ℝ) est une matrice symétrique si ∀(i, j) ∈ [[1; n]]², a_{j,i} = a_{i,j}.
+- 0_{n,p} ∈ M_{n,p}(ℝ) est la matrice nulle, dont tous les coefficients valent 0. On la note aussi 0.
+- Id_n ∈ M_n(ℝ) est la matrice identité : diagonale, de taille n, dont les coefficients diagonaux valent 1.
+
+Exercice 2
+Pour n = 3, donner des exemples de matrices triangulaire supérieure (resp. inférieure), diagonale et symétrique.
+
+II - Opérations de base sur les matrices
+
+II.1 - Addition de matrices et multiplication d'un réel par une matrice
+
+Définition 3
+On définit les opérations suivantes sur l'ensemble M_{n,p}(ℝ) :
+Addition : ∀A = (a_{i,j})_{1≤i≤n, 1≤j≤p} ∈ M_{n,p}(ℝ), ∀B = (b_{i,j})_{1≤i≤n, 1≤j≤p} ∈ M_{n,p}(ℝ), A+B = (a_{i,j}+b_{i,j})_{1≤i≤n, 1≤j≤p} ∈ M_{n,p}(ℝ).
+Multiplication par un réel : ∀λ ∈ ℝ, ∀A = (a_{i,j})_{1≤i≤n, 1≤j≤p} ∈ M_{n,p}(ℝ), λA = (λa_{i,j})_{1≤i≤n, 1≤j≤p} ∈ M_{n,p}(ℝ).
+
+Exercice 3
+À partir des matrices de l'exercice 1, calculer E + D, 3B et A−3Id₃.
+
+Remarque 1
+⚠ Il est possible d'additionner deux matrices uniquement lorsqu'elles ont les mêmes dimensions.
+
+II.2 - Multiplication matricielle
+
+Définition 4
+On définit le produit d'une matrice A de n lignes et p colonnes avec une matrice B de p lignes et q colonnes comme la matrice de n lignes et q colonnes suivante :
+
+∀A = (a_{i,j})_{1≤i≤n, 1≤j≤p} ∈ M_{n,p}(ℝ), ∀B = (b_{k,j})_{1≤k≤p, 1≤j≤q} ∈ M_{p,q}(ℝ), AB = (∑_{k=1}^{p} a_{i,k}b_{k,j})_{1≤i≤n, 1≤j≤q} ∈ M_{n,q}(ℝ).
+
+⚠ On ne peut calculer le produit AB que si le nombre de lignes de A égale le nombre de colonnes de B.
+
+Remarque 2
+En particulier le produit d'une matrice ligne ℓ = (ℓ_j)_{1≤j≤n} ∈ M_{1,n}(ℝ) et d'une matrice colonne c = (c_i)_{1≤i≤n} ∈ M_{n,1}(ℝ) est un nombre, égal à ℓ_1c_1 + ... + ℓ_nc_n.
+Le coefficient (i, j) du produit AB est le produit de la i-ème ligne de A avec la j-ème colonne de B.
+
+On peut disposer les calculs ainsi :
+[Diagram showing matrix multiplication calculation]
+
+Exercice 4
+À partir des matrices de l'exemple 1, calculer les produits :
+1. ED   2. DE   3. AId₃   4. AC   5. 0₂,₃A   6. EB   7. Que dire de BE ?
+
+Proposition 1 :   Propriétés du produit
+Le produit matriciel ...
+1. est associatif : ∀A ∈ M_{n,p}(𝕂), ∀B ∈ M_{p,q}(𝕂), ∀C ∈ M_{q,r}(𝕂), (AB)C = A(BC).
+2. est distributif à gauche par rapport à − : ∀A ∈ M_{n,p}(𝕂), ∀B, C ∈ M_{p,q}(𝕂), A(B + C) = AB + AC.
+3. est distributif à droite par rapport à + : ∀A, B ∈ M_{n,p}(𝕂), ∀C ∈ M_{p,q}(𝕂), (A + B)C = AC + BC.
+4. commute avec le produit externe : ∀λ ∈ 𝕂, ∀(A, B) ∈ M_{n,p}(𝕂) × M_{p,q}(𝕂), (λA)B = A(λB) = λ(AB).
+5. vérifie ∀A ∈ M_{n,p}(𝕂), AId_p = A et Id_nA = A.
+6. n'est pas commutatif.
+7. ne vérifie pas la propriété du produit nul.
+
+Exercice 5
+Soit M = (-1 -3)
+          ( 2  4). Vérifier que M² − 3M + 2Id₂ = 0₂,₂ puis factoriser l'expression de gauche dans l'égalité précédente.
+
+III - Puissances de matrice
+
+Définition 5
+Soit k ∈ ℕ et soit A une matrice carrée de M_n(ℝ).
+On appelle puissance k-ième de A, et on note A^k, la matrice A × ... × A (k fois).
+Par convention A^0 = I_n.
+
+Comme le produit matriciel ne commute pas en général, la puissance de matrice garde seulement certaines propriétés des réels :
+
+Proposition 2
+Soient (k, l, n) ∈ ℕ² et (A, B) ∈ (M_p(ℝ)²).
+1. A^k A^l = A^{k+l}
+2. (A^k)^l = A^{kl}
+3. ⚠ Lorsque A et B commutent, on a :
+   (a) (AB)^k = A^k B^k
+   (b) (A−B)(A+B) = A² − B²
+   (c) (A+B)² = A² + 2AB + B²
+   (d) (A−B)² = A² − 2AB + B²
+   (e) (A+B)^n = ∑_{i=0}^{n} binom(n,i) A^i B^{n-i}
+
+Remarques 3
+Deux exemples fondamentaux de matrices qui commutent.
+- Pour tout A ∈ M_n(ℝ), pour tout λ ∈ ℝ : A et λI_n commutent.
+- Pour toute matrice carrée A : toutes les puissances de A commutent entre elles.
+
+Exercice 6
+Calculer, si possible :
+1. A² pour A = (1 1 2)
+                 (2 1 0)
+
+2. A², A³, B², AB, BA, A+B, (A+B)², A² + 2AB + B² pour A = (2 -1) et B = (3 -1)
+                                                            (0  1)        (0  3)
+
+3. M⁰, M¹, M², M³, M⁴, M^{100} pour M = (0 0 0 0)
+                                          (1 0 0 0)
+                                          (0 1 0 0)
+                                          (0 0 1 0)
+
+Remarque 4
+Une application importante du calcul de puissances de matrices est l'étude des suites récurrentes (notamment les suites récurrentes couplées qui interviennent en probabilités).
+
+IV - Inverse d'une matrice
+
+Définition 6
+Soit A ∈ M_n(ℝ) une matrice carrée. On appelle matrice inverse de A et on note A^{-1} ∈ M_n(ℝ) une matrice qui vérifie
+AA^{-1} = Id_n = A^{-1}A
+
+L'ensemble des matrices carrées de taille n à coefficients dans ℝ qui admettent une inverse est noté GL_n(ℝ).
+
+Proposition 3
+Soient A, B ∈ GL_n(ℝ).
+1. A^{-1} est unique : si BA = Id_n ou AB = Id_n alors B = A^{-1}.
+2. (A^{-1})^{-1} = A
+3. ⚠ (AB)^{-1} = B^{-1}A^{-1}.
+
+Exercice 7
+1. Vérifier que B = (1   0  -1)
+                    (1   1   1)
+                    (-1/2 1/2 1)
+                    (-1  0   2)
+   est l'inverse de la matrice A = (2 0  1)
+                                    (0 2 -1)
+                                    (1 0  1).
+
+2. Soit n ∈ ℕ. Montrer que si A² − A = I_n alors A est inversible, et préciser son inverse.
+
+3. Soit n ∈ ℕ, λ ∈ ℝ*. Vérifier que λI_n est inversible, d'inverse (1/λ)I_n et que 0_n n'est pas inversible.
+
+Remarque 5
+Pour des matrices inversibles, les propriétés de calcul des puissances sont valables pour des puissances négatives.
+
+Remarque 6
+⚠ La somme de deux matrices inversibles n'est pas inversible en général. Par exemple I_n et −I_n sont inversibles mais I_n − I_n = 0_n ne l'est pas.
+
+Exercice 8
+1. Soit A ∈ GL_n(ℝ). Montrer que pour tout p ∈ ℕ, A^p est inversible et préciser son inverse.
+2. Soit A ∈ M_p(ℝ) et P ∈ GL_p(ℝ). Simplifier (P^{-1}AP)², (P^{-1}AP)³.
+   Conjecturer une formule pour (P^{-1}AP)^n valable pour n ∈ ℕ* et la prouver par récurrence. Est-elle encore valable pour n = 0 ?
+   Si de plus A est inversible, vérifier que pour tout n ∈ ℕ, (P^{-1}AP)^n est inversible et préciser son inverse.
+   Déduire que la formule démontrée est encore vraie pour les entiers négatifs.
+
+En calcul matriciel, lorsqu'une matrice est inversible cela permet d'obtenir de nouvelles règles de calcul. On peut "simplifier" par cette matrice dans les égalités, comme on le fait dans ℝ à l'aide de la division. Cependant il ne faut pas oublier de tenir compte de la non commutativité des matrices.
+Pour ne pas faire d'erreur, il faut multiplier, à gauche ou à droite, par l'inverse de la matrice. En conséquence :
+
+Proposition 4
+Soit C ∈ GL_n(ℝ), et A et B des matrices telles que les produits suivants aient un sens.
+
+Simplification à gauche :  CA = B ⟹ A = C^{-1}B
+                          CA = CB ⟹ A = B
+
+Simplification à droite :  AC = B ⟹ A = BC^{-1}
+                          AC = BC ⟹ A = B
+
+Exercice 9
+1. Soient A, B telles que AB = 0. Montrer que si A ≠ 0 et B ≠ 0 alors ni A ni B ne sont inversibles.
+2. Soit B = (-1 1)
+           ( 0 0) Calculer B² + B et déduire que B n'est pas inversible.
+
+Proposition 5
+Soit A = (a b)
+         (c d), où a, b, c, d sont quatre nombres réels. Alors,
+
+1. Si ad − bc = 0, A n'est pas inversible.
+2. Si ad − bc ≠ 0, A est inversible et A^{-1} = (1/(ad−bc)) * (d  -b)
+                                                             (-c   a).
+
+Remarque 7
+Le calcul explicite de l'inverse d'une matrice carrée de petite dimension (3 × 3, voire plus rarement 4×4), qui repose essentiellement sur une série de manipulations techniques, sera vu dans le chapitre consacré à la résolution de systèmes linéaires. Ceci signifie qu'une bonne partie des exercices sur les matrices n'est pas encore faisable.
+
+V - Transposition et matrices symétriques
+
+Soit A = (a_{i,j})_{1≤i≤n, 1≤j≤p} ∈ M_{n,p}(ℝ). La transposée de A est la matrice ᵗA = (a'_{i,j})_{1≤i≤p, 1≤j≤n} ∈ M_{p,n}(ℝ) où :
+
+∀(i, j) ∈ [[1; p]] × [[1; n]], a'_{i,j} = a_{j,i}
+
+La transposition est une opération qui échange les lignes et les colonnes d'une matrice.
+
+Exercice 10
+Calculer la transposée de chacune des matrices de l'exemple 1.
+
+Proposition 6 :   Propriétés de la transposition
+On a :
+1. ∀A ∈ M_{n,p}(𝕂),   ᵗ(ᵗA) = A.
+2. ⚠ ∀A ∈ M_{n,p}(𝕂), ∀B ∈ M_{p,q}(𝕂),   ᵗ(AB) = ᵗB ᵗA.
+3. ∀λ ∈ ℝ, ∀A, B ∈ M_{n,p}(𝕂),   ᵗ(λA + B) = λ ᵗA + ᵗB.
+4. ∀A ∈ GL_n(ℝ),   ᵗ(A^{-1}) = (ᵗA)^{-1}.
+5. L'ensemble {A ∈ M_n(ℝ) : A = ᵗA} est l'ensemble des matrices symétriques d'ordre n (parfois noté S_n(ℝ)).
+
+Exercice 11
+Vérifier la deuxième formule sur les matrices B et E de l'exemple 1.
+`;

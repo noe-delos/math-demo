@@ -6,7 +6,7 @@ import {
   BedrockRuntimeClient,
   ConverseCommand,
 } from "@aws-sdk/client-bedrock-runtime";
-import { courseContent } from "./data";
+import { courseContent, courseSecondCourse } from "./data";
 
 export async function POST(request: NextRequest) {
   try {
@@ -63,6 +63,9 @@ export async function POST(request: NextRequest) {
 
 Voici le contenu du cours sur les primitives et équations différentielles sur lequel vous devez baser strictement vos réponses :
 ${courseContent}
+
+Voici le contenu d'un second cours sur les matrices sur lequel vous devez baser strictement vos réponses :
+${courseSecondCourse}
 
 Votre tâche:
 1. Examinez attentivement l'énoncé de l'exercice et sa correction qui ont été extraits des images.
